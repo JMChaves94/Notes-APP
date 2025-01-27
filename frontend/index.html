@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Notes Application</h1>
+  </header>
+
+  <main>
+    <section id="form-container">
+      <form id="note-form">
+        <input type="text" id="title" placeholder="Title" required />
+        <textarea id="content" placeholder="Content" required></textarea>
+        <select id="status">
+          <option value="true">Active</option>
+          <option value="false">Archived</option>
+        </select>
+        <select id="categoryDropdown">
+          <option value="">Select Category</option>
+          <!-- Categories will be dynamically loaded here -->
+        </select>
+        <button type="submit">Add Note</button>
+      </form>
+      <div id="success-message" style="display: none;"></div>
+      <div id="error-message" style="display: none;"></div>
+    </section>
+
+    <section id="notes-container">
+      <div class="notes-header">
+        <h2>Notes</h2>
+        <div id="filter-container">
+          <label for="filterCategoryDropdown">Filter by Category: </label>
+          <select id="filterCategoryDropdown">
+            <option value="">All Categories</option>
+            <!-- Categories will be dynamically loaded here -->
+          </select>
+        </div>
+      </div>
+      <table id="notes-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Status</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Notes will be dynamically inserted here -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <small>&copy; 2025 Notes App</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
