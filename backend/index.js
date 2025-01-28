@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 // Configuración de CORS para permitir solicitudes desde el frontend
 const corsOptions = {
-  origin: 'http://127.0.0.1:5500', // Origen permitido (frontend)
+  origin: 'http://127.0.0.1:5500', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };

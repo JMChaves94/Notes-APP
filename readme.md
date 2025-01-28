@@ -5,7 +5,7 @@
 ### 1.1. Installation
 - **Operating System:** Windows.
 - **Steps performed:**
-  - Downloaded PostgreSQL from the official website.
+  - Downloaded PostgreSQL from the [official website](https://www.postgresql.org/).
   - Selected components during installation:
     - PostgreSQL Server.
     - pgAdmin 4.
@@ -71,6 +71,11 @@ CREATE TABLE Users (
 - **Notes** has an optional foreign key `category_id` linked to the `Categories` table.
 - **Categories** can have many `Notes` associated with it.
 - **Users** are associated with the `login` functionality to secure the application.
+
+### 2.3. Seed Data
+- Initial data is inserted into the tables for testing purposes:
+  - Categories: `Work`, `Personal`, `Urgent`.
+  - Users: `test@example.com` (password: `12345678`, hashed).
 
 ## 3. Backend Setup
 
@@ -194,6 +199,15 @@ npm test
 1. Navigate to the `frontend` folder.
 2. Open `index.html` in your browser using Live Server or a similar tool.
 
+### Database Initialization:
+To initialize the database, run the `setup.bat` script on Windows:
+```bash
+setup.bat
+```
+This script will:
+- Create or reset the database schema.
+- Seed the database with initial data (categories and a test user).
+
 ## 8. Tools and Technologies Used
 - **Database:** PostgreSQL
 - **Backend:** Node.js, Express
@@ -203,18 +217,25 @@ npm test
 - **Other Tools:** pgAdmin, Live Server
 
 ## 9. Bash Scripts for Automation
-- **Script to start the backend:**
-  ```bash
-  #!/bin/bash
-  cd backend && npm start
-  ```
-- **Script to run tests:**
-  ```bash
-  #!/bin/bash
-  cd backend && npm test
-  ```
+
+### Windows Batch Script (setup.bat):
+```batch
+@echo off
+set /p PGUSER=Enter PostgreSQL username:
+set /p PGPASSWORD=Enter PostgreSQL password:
+psql -U %PGUSER% -f backend/db/schema.sql
+cd backend
+npm install
+npm start
+```
 
 ## 10. Additional Notes
 - Ensure PostgreSQL is running locally before starting the backend.
 - Replace `your_password` with the actual password for the `postgres` user in `database.js`.
+- Default user credentials for login:
+  - **Email:** `test@example.com`
+  - **Password:** `12345678`.
+
+## 11. Deployment
+- If deployed to a live server (e.g., Heroku), the deployed URL should be included here.
 
