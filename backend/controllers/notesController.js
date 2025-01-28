@@ -5,12 +5,13 @@ const getAllNotes = async (req, res) => {
   const { categoryId } = req.query; // Recoge el parámetro de categoría desde la URL
   console.log('Fetching all notes...');
   try {
+    console.log('Category ID received:', categoryId);
     const notes = await notesService.getAllNotes(categoryId); // Pasa el filtro al servicio
     console.log('Notes fetched successfully:', notes);
     res.status(200).json(notes);
   } catch (error) {
-    console.error('Error fetching notes:', error);
-    res.status(500).send('Error fetching notes');
+    console.error('Error fetching notes:', error.message);
+    res.status(500).json({ error: 'Error fetching notes', details: error.message });
   }
 };
 
@@ -23,8 +24,8 @@ const createNote = async (req, res) => {
     console.log('Note created successfully:', newNote);
     res.status(201).json(newNote);
   } catch (error) {
-    console.error('Error creating note:', error);
-    res.status(500).send('Error creating note');
+    console.error('Error creating note:', error.message);
+    res.status(500).json({ error: 'Error creating note', details: error.message });
   }
 };
 
@@ -37,13 +38,13 @@ const updateNote = async (req, res) => {
     const updatedNote = await notesService.updateNote(id, title, content, status, categoryId);
     if (!updatedNote) {
       console.warn(`Note with ID ${id} not found`);
-      return res.status(404).send('Note not found');
+      return res.status(404).json({ error: 'Note not found' });
     }
     console.log('Note updated successfully:', updatedNote);
     res.status(200).json(updatedNote);
   } catch (error) {
-    console.error('Error updating note:', error);
-    res.status(500).send('Error updating note');
+    console.error('Error updating note:', error.message);
+    res.status(500).json({ error: 'Error updating note', details: error.message });
   }
 };
 
@@ -55,13 +56,13 @@ const deleteNote = async (req, res) => {
     const deletedNote = await notesService.deleteNote(id);
     if (!deletedNote) {
       console.warn(`Note with ID ${id} not found`);
-      return res.status(404).send('Note not found');
+      return res.status(404).json({ error: 'Note not found' });
     }
     console.log('Note deleted successfully:', deletedNote);
     res.status(200).json(deletedNote);
   } catch (error) {
-    console.error('Error deleting note:', error);
-    res.status(500).send('Error deleting note');
+    console.error('Error deleting note:', error.message);
+    res.status(500).json({ error: 'Error deleting note', details: error.message });
   }
 };
 
@@ -74,13 +75,13 @@ const assignCategoryToNote = async (req, res) => {
     const result = await notesService.assignCategoryToNote(id, categoryId);
     if (!result) {
       console.warn(`Note or category not found: noteId=${id}, categoryId=${categoryId}`);
-      return res.status(404).send('Note or category not found');
+      return res.status(404).json({ error: 'Note or category not found' });
     }
     console.log('Category assigned successfully:', result);
     res.status(200).json(result);
   } catch (error) {
-    console.error('Error assigning category to note:', error);
-    res.status(500).send('Error assigning category to note');
+    console.error('Error assigning category to note:', error.message);
+    res.status(500).json({ error: 'Error assigning category to note', details: error.message });
   }
 };
 
